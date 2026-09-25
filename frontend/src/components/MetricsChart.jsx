@@ -1,0 +1,7 @@
+import { Bar, BarChart, CartesianGrid, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts'
+
+export default function MetricsChart({ metrics }) {
+  const rows = Object.entries(metrics?.models || {}).map(([model, value]) => ({ model: model === 'linear_regression' ? 'Linear' : model === 'random_forest' ? 'Forest' : 'ANN', importance: value.r2 }))
+  const importance = metrics?.random_forest_feature_importance || []
+  return <div className="chart-grid"><div className="chart-panel"><div className="panel-title"><div><span className="eyebrow">Random Forest</span><h3>Feature importance</h3></div></div>{importance.length ? <ResponsiveContainer width="100%" height={300}><BarChart layout="vertical" data={importance.slice(0, 8)} margin={{ left: 24 }}><CartesianGrid strokeDasharray="3 3" horizontal={false} /><XAxis type="number" /><YAxis type="category" dataKey="feature" width={95} tick={{ fontSize: 11 }} /><Tooltip /><Bar dataKey="importance" fill="#e27648" radius={[0,4,4,0]} /></BarChart></ResponsiveContainer> : <div className="empty-state">Feature importance appears after training.</div>}</div><div className="chart-panel"><div className="panel-title"><div><span className="eyebrow">Model score</span><h3>R² at a glance</h3></div></div><ResponsiveContainer width="100%" height={300}><BarChart data={rows}><CartesianGrid strokeDasharray="3 3" vertical={false} /><XAxis dataKey="model" /><YAxis domain={[0, 1]} /><Tooltip /><Bar dataKey="importance" name="R²" fill="#2a9d8f" radius={[4,4,0,0]} /></BarChart></ResponsiveContainer></div></div>
+}

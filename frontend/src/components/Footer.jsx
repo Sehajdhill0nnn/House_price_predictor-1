@@ -1,0 +1,3 @@
+export default function Footer({ onNavigate }) {
+  return <footer className="site-footer"><div><strong>HouseAI</strong><p>Machine learning powered house price intelligence.</p></div><div className="footer-links"><button onClick={() => onNavigate('dashboard')}>Dashboard</button><button onClick={() => onNavigate('predict')}>Predict</button><button onClick={() => onNavigate('models')}>Models</button><button onClick={() => onNavigate('history')}>History</button></div><div className="footer-tech"><span>React</span><span>FastAPI</span><span>scikit-learn</span><span>TensorFlow</span></div></footer>
+}

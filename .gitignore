@@ -1,0 +1,13 @@
+__pycache__/
+*.py[cod]
+.venv/
+.env
+.DS_Store
+backend/*.db
+node_modules/
+dist/
+ml/data/*.csv
+backend/trained_models/*
+!backend/trained_models/.gitkeep
+ml/outputs/*
+!ml/outputs/.gitkeep

@@ -1,0 +1,7 @@
+.git
+.venv
+node_modules
+frontend/dist
+ml/data/*.csv
+ml/outputs/*.png
+__pycache__
