@@ -144,7 +144,7 @@ The frontend is served at http://localhost:5173 and the API at http://localhost:
 
 ## Deploy to Vercel and Render
 
-The React/Vite frontend is deployed on Vercel, while the FastAPI service (including TensorFlow) runs separately on Render. The Render Blueprint is in `render.yaml`; it uses the Dockerfile, includes the trained model artifacts, and mounts a persistent disk for SQLite history. The backend Blueprint uses a paid Standard instance and persistent disk; review Render's current pricing before creating the service.
+The React/Vite frontend is deployed on Vercel, while the FastAPI service (including TensorFlow) runs separately on Render. The Render Blueprint is in `render.yaml`; it uses the Dockerfile, includes the trained model artifacts, and mounts a persistent disk for SQLite history. The backend Blueprint uses Render's 1 CPU / 2 GB compute plan (currently $25/month) and a 1 GB persistent disk (currently $0.25/month); review [Render's current pricing](https://render.com/pricing) before creating the service.
 
 1. Push this repository to GitHub and import it in Vercel. Set the Vercel project Root Directory to `frontend`.
 2. Create the backend from the repository's Render Blueprint (`render.yaml`). Wait for its deployment and copy its service URL.

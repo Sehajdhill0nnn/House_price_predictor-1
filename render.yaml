@@ -2,7 +2,7 @@ services:
   - type: web
     name: house-price-prediction-api
     runtime: docker
-    plan: standard
+    plan: 1c-2g
     dockerContext: .
     dockerfilePath: ./backend/Dockerfile
     healthCheckPath: /api/health
