@@ -24,80 +24,80 @@
   "target": "SalePrice",
   "models": {
     "linear_regression": {
-      "mae": 21607.75512125918,
-      "mse": 1070301145.4769914,
-      "rmse": 32715.457286686233,
-      "r2": 0.8616141545866575,
-      "training_time_seconds": 0.0107,
-      "prediction_time_seconds": 4e-06
+      "mae": 20338.56251582754,
+      "mse": 1101605039.985432,
+      "rmse": 33190.43597160833,
+      "r2": 0.8563809399718589,
+      "training_time_seconds": 0.006,
+      "prediction_time_seconds": 7.5e-05
     },
     "random_forest": {
-      "mae": 19092.150250000002,
-      "mse": 718911504.6344093,
-      "rmse": 26812.52514468582,
-      "r2": 0.9070474914778557,
-      "training_time_seconds": 0.145,
-      "prediction_time_seconds": 3.4e-05
+      "mae": 17988.495772178736,
+      "mse": 805563804.1110859,
+      "rmse": 28382.455921063032,
+      "r2": 0.8949765913011275,
+      "training_time_seconds": 0.4471,
+      "prediction_time_seconds": 1.6e-05
     },
     "neural_network": {
-      "mae": 22167.98828125,
-      "mse": 1125410432.0,
-      "rmse": 33547.13746357504,
-      "r2": 0.854488730430603,
-      "training_time_seconds": 19.6035,
-      "prediction_time_seconds": 0.000666
+      "mae": 20765.91796875,
+      "mse": 1157047040.0,
+      "rmse": 34015.39416205551,
+      "r2": 0.8491528034210205,
+      "training_time_seconds": 28.5337,
+      "prediction_time_seconds": 0.00283
     }
   },
   "random_forest_feature_importance": [
     {
       "feature": "OverallQual",
-      "importance": 0.45601437840852155
+      "importance": 0.49217105090330104
     },
     {
       "feature": "GrLivArea",
-      "importance": 0.1105424699157987
+      "importance": 0.13086517173260465
     },
     {
       "feature": "GarageCars",
-      "importance": 0.07811324593773918
-    },
-    {
-      "feature": "GarageArea",
-      "importance": 0.06354838380904596
+      "importance": 0.04665336673188529
     },
     {
       "feature": "TotalBsmtSF",
-      "importance": 0.06190575658287091
-    },
-    {
-      "feature": "LotArea",
-      "importance": 0.043371641162353675
+      "importance": 0.046032140365780995
     },
     {
       "feature": "1stFlrSF",
-      "importance": 0.036846455229328584
-    },
-    {
-      "feature": "YearBuilt",
-      "importance": 0.022842881276190146
-    },
-    {
-      "feature": "ExterQual_TA",
-      "importance": 0.022002546725113693
-    },
-    {
-      "feature": "FullBath",
-      "importance": 0.01773553349420089
-    },
-    {
-      "feature": "TotRmsAbvGrd",
-      "importance": 0.015277845950117065
+      "importance": 0.0425864280018127
     },
     {
       "feature": "2ndFlrSF",
-      "importance": 0.01047285759153583
+      "importance": 0.036690292390791336
+    },
+    {
+      "feature": "LotArea",
+      "importance": 0.03240556400751999
+    },
+    {
+      "feature": "YearBuilt",
+      "importance": 0.03221530815769852
+    },
+    {
+      "feature": "GarageArea",
+      "importance": 0.022500960087190873
+    },
+    {
+      "feature": "ExterQual_TA",
+      "importance": 0.017988975882133697
+    },
+    {
+      "feature": "YearRemodAdd",
+      "importance": 0.01653046739298316
+    },
+    {
+      "feature": "BsmtQual_Ex",
+      "importance": 0.015520397733514293
     }
   ],
-  "dataset_rows": 500,
-  "test_rows": 100
+  "dataset_rows": 1460,
+  "test_rows": 292
 }

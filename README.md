@@ -142,6 +142,17 @@ docker compose up --build
 
 The frontend is served at http://localhost:5173 and the API at http://localhost:8000. Train artifacts must be generated before prediction; mount or copy them into `backend/trained_models/`.
 
+## Deploy to Vercel and Render
+
+The React/Vite frontend is deployed on Vercel, while the FastAPI service (including TensorFlow) runs separately on Render. The Render Blueprint is in `render.yaml`; it uses the Dockerfile, includes the trained model artifacts, and mounts a persistent disk for SQLite history. The backend Blueprint uses a paid Standard instance and persistent disk; review Render's current pricing before creating the service.
+
+1. Push this repository to GitHub and import it in Vercel. Set the Vercel project Root Directory to `frontend`.
+2. Create the backend from the repository's Render Blueprint (`render.yaml`). Wait for its deployment and copy its service URL.
+3. In Vercel Project Settings → Environment Variables, set `VITE_API_URL` to `https://<your-render-service>.onrender.com/api`, then redeploy the frontend.
+4. In Render's backend environment, set `CORS_ORIGINS` to the Vercel production origin, for example `https://<your-project>.vercel.app`. Add any Vercel preview origin you want to use, separated by commas.
+
+The frontend build is validated with `npm run build` from `frontend/`. Prediction/history functionality requires both deployments and the Vercel origin to be present in the backend CORS setting.
+
 ## University report outline
 
 See [docs/report_outline.md](docs/report_outline.md) for sections covering the abstract, literature review, preprocessing, model methodology, architecture, database, experiments, results, limitations, and future scope. Add screenshots from the running dashboard and the generated EDA plots to the final submission.

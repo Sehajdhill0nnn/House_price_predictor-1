@@ -9,5 +9,8 @@ dist/
 ml/data/*.csv
 backend/trained_models/*
 !backend/trained_models/.gitkeep
+!backend/trained_models/preprocessing.pkl
+!backend/trained_models/linear_regression.pkl
+!backend/trained_models/random_forest.pkl
 ml/outputs/*
 !ml/outputs/.gitkeep
