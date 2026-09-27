@@ -1,6 +1,15 @@
 import axios from 'axios'
 
-const api = axios.create({ baseURL: import.meta.env.VITE_API_URL || 'http://localhost:8000/api' })
+const getBaseUrl = () => {
+  const envUrl = import.meta.env.VITE_API_URL
+  if (!envUrl) {
+    return 'http://localhost:8000/api'
+  }
+  const trimmed = envUrl.trim().replace(/\/+$/, '')
+  return trimmed.endsWith('/api') ? trimmed : `${trimmed}/api`
+}
+
+const api = axios.create({ baseURL: getBaseUrl() })
 export const predictHouse = (payload) => api.post('/predict', payload)
 export const fetchMetrics = () => api.get('/models/metrics')
 export const fetchHistory = () => api.get('/history')

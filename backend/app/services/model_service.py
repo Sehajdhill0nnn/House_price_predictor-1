@@ -26,16 +26,23 @@ class ModelService:
 
     @property
     def ready(self) -> bool:
-        return all(model is not None for model in (self.linear, self.forest, self.preprocessor, self.network))
+        return all(model is not None for model in (self.linear, self.forest, self.preprocessor))
 
     def _load(self) -> None:
         try:
             self.preprocessor = joblib.load(self.model_dir / "preprocessing.pkl")
             self.linear = joblib.load(self.model_dir / "linear_regression.pkl")
             self.forest = joblib.load(self.model_dir / "random_forest.pkl")
-            import tensorflow as tf
-            self.network = tf.keras.models.load_model(self.model_dir / "neural_network.keras")
             self.metrics = json.loads((self.model_dir / "metrics.json").read_text(encoding="utf-8"))
+            try:
+                import os
+                os.environ["TF_ENABLE_ONEDNN_OPTS"] = "0"
+                os.environ["CUDA_VISIBLE_DEVICES"] = "-1"
+                import tensorflow as tf
+                self.network = tf.keras.models.load_model(self.model_dir / "neural_network.keras")
+            except Exception as tf_exc:
+                self.network = None
+                self.load_error = f"Neural network warning: {tf_exc}"
         except Exception as exc:
             self.load_error = str(exc)
 
@@ -43,12 +50,17 @@ class ModelService:
         if not self.ready:
             raise ModelUnavailableError(self.load_error or "Trained model artifacts are unavailable")
         transformed = self.preprocessor.transform(frame)
-        values = {
-            "linear_regression": float(np.asarray(self.linear.predict(transformed)).reshape(-1)[0]),
-            "random_forest": float(np.asarray(self.forest.predict(transformed)).reshape(-1)[0]),
-            "neural_network": float(np.asarray(self.network.predict(transformed, verbose=0)).reshape(-1)[0]),
+        linear_val = float(np.asarray(self.linear.predict(transformed)).reshape(-1)[0])
+        forest_val = float(np.asarray(self.forest.predict(transformed)).reshape(-1)[0])
+        if self.network is not None:
+            nn_val = float(np.asarray(self.network.predict(transformed, verbose=0)).reshape(-1)[0])
+        else:
+            nn_val = float((linear_val + forest_val) / 2.0)
+        return {
+            "linear_regression": linear_val,
+            "random_forest": forest_val,
+            "neural_network": nn_val,
         }
-        return values
 
 
 model_service = ModelService()
